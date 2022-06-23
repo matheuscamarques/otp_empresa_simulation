@@ -12,7 +12,7 @@ defmodule Supervisor.Logistica do
         # We can't just use `{OurNewApp.Counter, start_number}`
         # because we need different ids for children
 
-        Supervisor.child_spec({Specialist.Suporte, start_number}, id: UUID.uuid1())
+        Supervisor.child_spec({Specialist.Logistica, start_number}, id: UUID.uuid1())
       end
 
       Supervisor.init(children, strategy: :rest_for_one)
