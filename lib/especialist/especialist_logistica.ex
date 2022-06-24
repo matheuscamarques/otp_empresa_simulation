@@ -12,6 +12,10 @@ defmodule Specialist.Logistica do
     GenServer.call(pid, :get)
   end
 
+  def run(pid) do
+    GenServer.cast(pid, :run)
+  end
+
   def init(start_from) do
     st = %{
       current: start_from,
@@ -23,6 +27,11 @@ defmodule Specialist.Logistica do
 
   def handle_call(:get, _from, st) do
     {:reply, st.current, st}
+  end
+
+  def handle_cast(:run, st) do
+    Process.sleep(10 * 1000);
+    {:noreply, st}
   end
 
   def handle_info({:timeout, _timer_ref, :tick}, st) do
